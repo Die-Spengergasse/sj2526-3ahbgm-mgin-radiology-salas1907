@@ -1,0 +1,65 @@
+package at.spengergasse.spring_thymeleaf.entities;
+
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+
+@Entity
+@Table(name="r_reservierungen")
+public class Reservierungen {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "r_id")
+    private Integer id;
+
+    @Column(name = "r_datum")
+    private LocalDate datum;
+
+    @ManyToOne
+    @JoinColumn(name = "p_patient_p_svnr", nullable = false)
+    private Patient patient;
+
+    @ManyToOne
+    @JoinColumn(name = "g_geraete_g_id", nullable = false)
+    private Geraete geraete;
+
+    public Reservierungen() {}
+
+    public Reservierungen(LocalDate datum, Patient patient, Geraete geraete) {
+        this.datum = datum;
+        this.patient = patient;
+        this.geraete = geraete;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public LocalDate getDatum() {
+        return datum;
+    }
+
+    public void setDatum(LocalDate datum) {
+        this.datum = datum;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Geraete getGeraete() {
+        return geraete;
+    }
+
+    public void setGeraete(Geraete geraete) {
+        this.geraete = geraete;
+    }
+}

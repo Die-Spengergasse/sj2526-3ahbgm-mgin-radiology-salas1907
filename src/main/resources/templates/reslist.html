@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservierungen Liste</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Reservierungen</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Patient</th>
+            <th>Gerät</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="r : ${reservierungen}">
+            <td th:text="${r.datum}"></td>
+            <td th:text="${r.patient.vorname + ' ' + r.patient.nachname}"></td>
+            <td th:text="${r.geraete.artDesgeraets}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/reservierungen/add}" class="btn btn-primary">Neue Reservierung</a>
+    <a th:href="@{/}" class="btn btn-default">Zur Startseite</a>
+</div>
+</body>
+</html>

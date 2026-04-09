@@ -10,14 +10,18 @@
     <table class="table">
         <thead>
             <tr>
-                <th>name</th>
+                <th>vorname</th>
+                <th>nachname</th>
                 <th>birth</th>
+                <th>gender</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="p : ${patients}">
-                <td th:text="${p.name}"></td>
+                <td th:text="${p.vorname}"></td>
+                <td th:text="${p.nachname}"></td>
                 <td th:text="${p.birth}"></td>
+                <td th:text="${p.geschlecht}"></td>
             </tr>
         </tbody>
 
@@ -25,6 +29,9 @@
 
     <p>
         <a href="/patient/add">new patient</a>
+    </p>
+    <p>
+        <a href="/">zur Startseite</a>
     </p>
 </div>
 </body>

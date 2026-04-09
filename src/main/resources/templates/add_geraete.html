@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>add new patient</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <form th:action="@{/geraete/add}" th:object="${geraete}" method="post">
+        <input type="text" th:field="*{artDesgeraets}" class="form-control" placeholder="Art des Geräts">
+        <input type="text" th:field="*{standort}" class="form-control" placeholder="Stndort des Geräts">
+        <input type="submit" class="form-control" value="Save">
+    </form>
+</div>
+</body>
+</html>

@@ -1,15 +1,13 @@
 package at.spengergasse.spring_thymeleaf.controllers;
 
 import at.spengergasse.spring_thymeleaf.entities.Patient;
-import at.spengergasse.spring_thymeleaf.entities.PatientRepository;
+import at.spengergasse.spring_thymeleaf.repositories.PatientRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequestMapping("/patient")
@@ -26,15 +24,15 @@ public class PatientController {
         return "patlist";
     }
 
-    @GetMapping("/add")
-    public String addPatient(Model model) {
-        model.addAttribute("patient", new Patient());
-        return "add_patient";
-    }
+        @GetMapping("/add")
+        public String addPatient(Model model) {
+            model.addAttribute("patient", new Patient());
+            return "add_patient";
+        }
 
-    @PostMapping("/add")
-    public String addPatient(@ModelAttribute("patient") Patient patient) {
-        patientRepository.save(patient);
-        return  "redirect:/patient/list";
-    }
+        @PostMapping("/add")
+        public String addPatient(@ModelAttribute("patient") Patient patient) {
+            patientRepository.save(patient);
+            return  "redirect:/patient/list";
+        }
 }

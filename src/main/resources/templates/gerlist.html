@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patients List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Art des Geräts</th>
+            <th>Standort</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="g : ${geraete}">
+            <td th:text="${g.artDesgeraets}"></td>
+            <td th:text="${g.standort}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>
+        <a th:href="@{/geraete/add}">new Gerät</a>
+    </p>
+    <p>
+        <a href="/">zur Startseite</a>
+    </p>
+</div>
+</body>
+</html>

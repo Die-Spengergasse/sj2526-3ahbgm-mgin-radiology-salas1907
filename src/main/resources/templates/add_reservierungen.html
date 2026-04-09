@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservierung hinzufügen</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Neue Reservierung</h2>
+    <form th:action="@{/reservierungen/add}" th:object="${reservierungen}" method="post">
+
+        <div class="form-group">
+            <label>Datum</label>
+            <input type="date" th:field="*{datum}" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Patient</label>
+            <select th:field="*{patient}" class="form-control">
+                <option value="">-- Patient wählen --</option>
+                <option th:each="p : ${patienten}"
+                        th:value="${p.id}"
+                        th:text="${p.vorname + ' ' + p.nachname}">
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Gerät</label>
+            <select th:field="*{geraete}" class="form-control">
+                <option value="">-- Gerät wählen --</option>
+                <option th:each="g : ${geraete}"
+                        th:value="${g.id}"
+                        th:text="${g.artDesgeraets + ' - ' + g.standort}">
+                </option>
+            </select>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Speichern">
+        <a th:href="@{/reservierungen/list}" class="btn btn-default">Abbrechen</a>
+    </form>
+</div>
+</body>
+</html>
