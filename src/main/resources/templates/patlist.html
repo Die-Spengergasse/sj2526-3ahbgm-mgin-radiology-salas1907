@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Patients List</title>
@@ -7,25 +7,31 @@
 </head>
 <body>
 <div class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>vorname</th>
-                <th>nachname</th>
-                <th>birth</th>
-                <th>gender</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="p : ${patients}">
-                <td th:text="${p.vorname}"></td>
-                <td th:text="${p.nachname}"></td>
-                <td th:text="${p.birth}"></td>
-                <td th:text="${p.geschlecht}"></td>
-            </tr>
-        </tbody>
-
-    </table>
+    <h2>Patienten Liste</h2>
+    <form th:action="@{/patient/delete}" method="post">
+        <input type="hidden" name="_method" value="DELETE"/>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="selectAllPatients"/></th>
+                    <th>vorname</th>
+                    <th>nachname</th>
+                    <th>birth</th>
+                    <th>gender</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p : ${patients}">
+                    <td><input type="checkbox" name="ids" th:value="${p.id}"/></td>
+                    <td th:text="${p.vorname}"></td>
+                    <td th:text="${p.nachname}"></td>
+                    <td th:text="${p.birth}"></td>
+                    <td th:text="${p.geschlecht}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-danger">Ausgewählte Patienten löschen</button>
+    </form>
 
     <p>
         <a href="/patient/add">new patient</a>
@@ -34,5 +40,11 @@
         <a href="/">zur Startseite</a>
     </p>
 </div>
+<script>
+    document.getElementById('selectAllPatients').addEventListener('change', function() {
+        const checkboxes = document.querySelectorAll('input[name="ids"]');
+        checkboxes.forEach(checkbox => checkbox.checked = this.checked);
+    });
+</script>
 </body>
 </html>

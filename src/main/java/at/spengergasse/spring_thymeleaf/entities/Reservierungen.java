@@ -3,6 +3,7 @@ package at.spengergasse.spring_thymeleaf.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="r_reservierungen")
@@ -13,19 +14,19 @@ public class Reservierungen {
     private Integer id;
 
     @Column(name = "r_datum")
-    private LocalDate datum;
+    private LocalDateTime datum;
 
     @ManyToOne
-    @JoinColumn(name = "p_patient_p_svnr", nullable = false)
+    @JoinColumn(name = "p_patient_p_svnr")
     private Patient patient;
 
     @ManyToOne
-    @JoinColumn(name = "g_geraete_g_id", nullable = false)
+    @JoinColumn(name = "g_geraete_g_id")
     private Geraete geraete;
 
     public Reservierungen() {}
 
-    public Reservierungen(LocalDate datum, Patient patient, Geraete geraete) {
+    public Reservierungen(LocalDateTime datum, Patient patient, Geraete geraete) {
         this.datum = datum;
         this.patient = patient;
         this.geraete = geraete;
@@ -39,11 +40,11 @@ public class Reservierungen {
         this.id = id;
     }
 
-    public LocalDate getDatum() {
+    public LocalDateTime getDatum() {
         return datum;
     }
 
-    public void setDatum(LocalDate datum) {
+    public void setDatum(LocalDateTime datum) {
         this.datum = datum;
     }
 

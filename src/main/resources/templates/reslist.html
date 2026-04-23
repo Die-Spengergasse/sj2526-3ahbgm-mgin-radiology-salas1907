@@ -8,24 +8,36 @@
 <body>
 <div class="container">
     <h2>Reservierungen</h2>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Datum</th>
-            <th>Patient</th>
-            <th>Gerät</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="r : ${reservierungen}">
-            <td th:text="${r.datum}"></td>
-            <td th:text="${r.patient.vorname + ' ' + r.patient.nachname}"></td>
-            <td th:text="${r.geraete.artDesgeraets}"></td>
-        </tr>
-        </tbody>
-    </table>
+    <form th:action="@{/reservierungen/delete}" method="post">
+        <input type="hidden" name="_method" value="DELETE"/>
+        <table class="table">
+            <thead>
+            <tr>
+                <th><input type="checkbox" id="selectAllReservierungen"/></th>
+                <th>Datum</th>
+                <th>Patient</th>
+                <th>Gerät</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="r : ${reservierungen}">
+                <td><input type="checkbox" name="ids" th:value="${r.id}"/></td>
+                <td th:text="${r.datum}"></td>
+                <td th:text="${r.patient.vorname + ' ' + r.patient.nachname}"></td>
+                <td th:text="${r.geraete.artDesgeraets}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-danger">Ausgewählte Reservierungen löschen</button>
+    </form>
     <a th:href="@{/reservierungen/add}" class="btn btn-primary">Neue Reservierung</a>
     <a th:href="@{/}" class="btn btn-default">Zur Startseite</a>
 </div>
+<script>
+    document.getElementById('selectAllReservierungen').addEventListener('change', function() {
+        const checkboxes = document.querySelectorAll('input[name="ids"]');
+        checkboxes.forEach(checkbox => checkbox.checked = this.checked);
+    });
+</script>
 </body>
 </html>

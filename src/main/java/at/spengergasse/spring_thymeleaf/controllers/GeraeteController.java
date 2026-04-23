@@ -4,10 +4,14 @@ import at.spengergasse.spring_thymeleaf.entities.Geraete;
 import at.spengergasse.spring_thymeleaf.repositories.GeraeteRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/geraete")
@@ -36,4 +40,11 @@ public class GeraeteController {
         return "redirect:/geraete/list";
     }
 
+    @DeleteMapping("/delete")
+    public String deleteGeraete(@RequestParam List<Integer> ids) {
+        for (Integer id : ids) {
+            geraeteRepository.deleteById(id);
+        }
+        return "redirect:/geraete/list";
+    }
 }

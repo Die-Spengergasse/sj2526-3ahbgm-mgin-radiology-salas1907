@@ -16,6 +16,9 @@
                 <option value="M">Male</option>
                 <option value="F">Female</option>
             </select>
+            <div th:if="${fehlermeldung_patient}" class="alert alert-danger">
+                <strong>Fehler:</strong> <span th:text="${fehlermeldung_patient}"></span>
+            </div>
             <input type="submit" class="form-control" value="Save">
         </form>
     </div>

@@ -1,27 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Patients List</title>
+    <title>Geräte List</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Art des Geräts</th>
-            <th>Standort</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="g : ${geraete}">
-            <td th:text="${g.artDesgeraets}"></td>
-            <td th:text="${g.standort}"></td>
-        </tr>
-        </tbody>
-    </table>
+    <h2>Geräte Liste</h2>
+    <form th:action="@{/geraete/delete}" method="post">
+        <input type="hidden" name="_method" value="DELETE"/>
+        <table class="table">
+            <thead>
+            <tr>
+                <th><input type="checkbox" id="selectAllGeraete"/></th>
+                <th>Art des Geräts</th>
+                <th>Standort</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="g : ${geraete}">
+                <td><input type="checkbox" name="ids" th:value="${g.id}"/></td>
+                <td th:text="${g.artDesgeraets}"></td>
+                <td th:text="${g.standort}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-danger">Ausgewählte Geräte löschen</button>
+    </form>
 
     <p>
         <a th:href="@{/geraete/add}">new Gerät</a>
@@ -30,5 +36,11 @@
         <a href="/">zur Startseite</a>
     </p>
 </div>
+<script>
+    document.getElementById('selectAllGeraete').addEventListener('change', function() {
+        const checkboxes = document.querySelectorAll('input[name="ids"]');
+        checkboxes.forEach(checkbox => checkbox.checked = this.checked);
+    });
+</script>
 </body>
 </html>
