@@ -6,11 +6,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
+<br>
     <div class="container">
         <form th:action="@{/patient/add}" th:object="${patient}" method="post">
+            <input type="text" th:field="*{svnr}" class="form-control" placeholder="SVNR Number">
+            <br>
             <input type="text" th:field="*{vorname}" class="form-control" placeholder="Patient Vorname">
+            <br>
             <input type="text" th:field="*{nachname}" class="form-control" placeholder="Patient Nachname">
+            <br>
             <input type="date" th:field="*{birth}" class="form-control">
+            <br>
             <select th:field="*{geschlecht}" class="form-control">
                 <option value="">-- Select Gender --</option>
                 <option value="M">Male</option>

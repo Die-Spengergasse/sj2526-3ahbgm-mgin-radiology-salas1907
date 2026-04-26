@@ -54,25 +54,28 @@ public class ReservierungController {
         LocalDateTime reservierungsszeit = reservierungen.getDatum();
         Geraete reservierungsGeraet = reservierungen.getGeraete();
         Patient reservierungsPatient = reservierungen.getPatient();
+        LocalDateTime now = LocalDateTime.now();
         for (Reservierungen r : alleReservierungen) {
             Geraete reservierteGereate = r.getGeraete();
             Patient reserviertePatient = r.getPatient();
             if(reservierungsszeit.isBefore(r.getDatum().plusMinutes(15)) &&
                     reservierungsszeit.isAfter(r.getDatum().minusMinutes(15)) &&
+                    reservierungsszeit.isBefore(now) &&
                     reservierungsGeraet.getId() == reservierteGereate.getId() &&
-                    reservierungsPatient.getId() == reserviertePatient.getId()) {
+                    reservierungsPatient.getId() == reserviertePatient.getId()
+            ) {
                 return "redirect:/reservierungen/add?error=Zeitraum+ist+bereits+belegt";
+            } else if (reservierungsszeit.isBefore(now)) {
+                return "redirect:/reservierungen/add?error=Zeitraum+ist+in+der+Vergangenheit";
             }
         }
         reservierungenRepository.save(reservierungen);
         return "redirect:/reservierungen/list";
     }
 
-    @DeleteMapping("/delete")
-    public String deleteReservierung(@RequestParam List<Integer> ids) {
-        for (Integer id : ids) {
-            reservierungenRepository.deleteById(id);
-        }
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable int id) {
+        reservierungenRepository.deleteById(id);
         return "redirect:/reservierungen/list";
     }
 }

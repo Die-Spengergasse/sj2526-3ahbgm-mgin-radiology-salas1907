@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fehler</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="alert alert-danger" style="margin-top: 50px;">
+        <h2>Systemfehler / Whitelabel Error</h2>
+        <p th:if="${errorMessage}" th:text="${errorMessage}"></p>
+        <p th:unless="${errorMessage}">Datenbankverbindung fehlgeschlagen oder ein anderer Serverfehler ist aufgetreten. Bitte überprüfen Sie, ob MySQL läuft.</p>
+        <p th:if="${message}" style="color: gray; font-size: 0.9em;" th:text="${message}"></p>
+        <p>
+            <a href="/" class="btn btn-default mt-3">Zur Startseite</a>
+        </p>
+    </div>
+</div>
+</body>
+</html>
+

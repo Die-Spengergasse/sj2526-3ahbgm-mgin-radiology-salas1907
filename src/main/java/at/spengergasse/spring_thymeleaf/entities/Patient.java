@@ -11,16 +11,19 @@ import java.util.List;
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="p_svnr")
+    @Column(name="p_id")
     private Integer id;
+
+    @Column(name="p_svnr")
+    private String svnr;
 
     @Column(name="p_vorname")
     private String vorname;
 
-    @Column(name="p_nachname")
+    @Column(name="p_name")
     private String nachname;
 
-    @Column(name="p_gebdat")
+    @Column(name="p_geburtsdatum")
     private LocalDate birth;
 
     @Column(name="p_geschlecht")
@@ -38,12 +41,20 @@ public class Patient {
         this.birth = birth;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getSvnr() {
+        return svnr;
+    }
+
+    public void setSvnr(String svnr) {
+        this.svnr = svnr;
     }
 
     public String getVorname() {

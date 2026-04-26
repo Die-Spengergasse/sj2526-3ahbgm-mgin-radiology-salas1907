@@ -13,7 +13,7 @@ public class Geraete {
     @Column(name = "g_id", nullable = false)
     private Integer id;
 
-    @Column(name="g_artGeraet")
+    @Column(name="g_art")
     private String artDesgeraets;
 
     @Column(name="g_Standort")

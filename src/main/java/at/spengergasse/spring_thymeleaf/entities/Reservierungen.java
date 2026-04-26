@@ -13,15 +13,15 @@ public class Reservierungen {
     @Column(name = "r_id")
     private Integer id;
 
-    @Column(name = "r_datum")
+    @Column(name = "r_uhrzeit")
     private LocalDateTime datum;
 
     @ManyToOne
-    @JoinColumn(name = "p_patient_p_svnr")
+    @JoinColumn(name = "r_p_id")
     private Patient patient;
 
     @ManyToOne
-    @JoinColumn(name = "g_geraete_g_id")
+    @JoinColumn(name = "r_g_id")
     private Geraete geraete;
 
     public Reservierungen() {}

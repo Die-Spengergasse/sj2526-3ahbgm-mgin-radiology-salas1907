@@ -39,6 +39,13 @@ public class PatientController {
         if(patient.getBirth().isAfter(now)) {
             return "redirect:/patient/add?error=Geburtstdatum+liegt+in+der+Zukunft";
         }
+        if(!(patient.getSvnr().length() == 10)){
+            return "redirect:/patient/add?error=SVNR+muss+zehnstellig+sein";
+        }
+        if(!korrekteSvnr(patient)){
+            return "redirect:/patient/add?error=SVNR+ist+nicht+gültig";
+        }
+
         patientRepository.save(patient);
         return  "redirect:/patient/list";
     }
@@ -49,5 +56,20 @@ public class PatientController {
             patientRepository.deleteById(id);
         }
         return "redirect:/patient/list";
+    }
+
+    public boolean korrekteSvnr(Patient patient) {
+        String versicherungsnummer=patient.getSvnr();
+        int pruefziffer = 0;
+        int[] gewichtung = {3,7,9,0,5,8,4,2,1,6};
+
+        for(int i=0;i<gewichtung.length;i++){
+            pruefziffer += Character.getNumericValue(versicherungsnummer.charAt(i)) * gewichtung[i];
+        }
+        pruefziffer = pruefziffer % 11;
+
+
+        return pruefziffer == Character.getNumericValue(versicherungsnummer.charAt(3));
+
     }
 }
